@@ -1,26 +1,40 @@
 {
-    "name": "ts-node-template",
-    "version": "0.0.2",
-    "scripts": {
-        "start": "yarn react-scripts start",
-        "build": "yarn react-scripts build",
-        "test": "yarn react-scripts test",
-        "eject": "yarn react-scripts eject",
-        "lint": "eslint src/**/*.tsx --quiet"
-    },
-    "devDependencies": {
-        "@types/node": "^20.1.0",
-        "@types/react": "^18.2.5",
-        "@types/react-dom": "^18.2.4",
-        "eslint": "^8.40.0",
-        "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "prettier": "^2.8.8",
-        "typescript": "^5.0.4"
-    },
-    "dependencies": {
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-scripts": "^5.0.1"
-    }
+  "name": "ts-node-template",
+  "version": "0.0.2",
+  "scripts": {
+    "start": "yarn react-scripts start",
+    "build": "yarn react-scripts build",
+    "test": "yarn react-scripts test",
+    "eject": "yarn react-scripts eject",
+    "lint": "eslint src/**/*.tsx --quiet"
+  },
+  "devDependencies": {
+    "@types/node": "^20.1.0",
+    "@types/react": "^18.2.5",
+    "@types/react-dom": "^18.2.4",
+    "eslint": "^8.40.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^5.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

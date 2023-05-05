@@ -1,11 +1,8 @@
 import React from 'react';
+import ReleaseNotesGenerator from './ReleaseNotesGenerator';
 
-const App: React.FC = () => {
-    return (
-        <div>
-            <h1>Hello, World!</h1>
-        </div>
-    );
-};
+function App() {
+    return <ReleaseNotesGenerator />;
+}
 
 export default App;
