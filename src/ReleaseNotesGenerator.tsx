@@ -7,7 +7,7 @@ import {
     CssBaseline,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { generateInputData } from './github'; // Import generateInputData function
+import { generatePRInputData } from './fetch-prs'; // Import generateInputData function
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -49,7 +49,7 @@ const ReleaseNotesGenerator: React.FC = () => {
         event.preventDefault();
 
         // Use generateInputData function
-        const inputData = await generateInputData(
+        const inputData = await generatePRInputData(
             formState.repoUrl || 'https://github.com/subspace/subspace-cli',
             new Date(formState.startDate || '5/1/2023'),
             new Date(formState.endDate || '5/9/2023')
