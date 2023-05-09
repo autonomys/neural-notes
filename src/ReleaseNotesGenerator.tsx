@@ -1,4 +1,3 @@
-// ReleaseNotesGenerator.tsx
 import React, { useState } from 'react';
 import {
     TextField,
@@ -8,6 +7,7 @@ import {
     CssBaseline,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
+import { generateInputData } from './github'; // Import generateInputData function
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 interface FormState {
     repoUrl: string;
-    startRange: string;
-    endRange: string;
+    startDate: string;
+    endDate: string;
     additionalContext: string;
 }
 
@@ -33,8 +33,8 @@ const ReleaseNotesGenerator: React.FC = () => {
     const classes = useStyles();
     const [formState, setFormState] = useState<FormState>({
         repoUrl: '',
-        startRange: '',
-        endRange: '',
+        startDate: '',
+        endDate: '',
         additionalContext: '',
     });
 
@@ -45,10 +45,19 @@ const ReleaseNotesGenerator: React.FC = () => {
         setFormState({ ...formState, [field]: event.target.value });
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        // Use generateInputData function
+        const inputData = await generateInputData(
+            formState.repoUrl || 'https://github.com/subspace/subspace-cli',
+            new Date(formState.startDate || '5/1/2023'),
+            new Date(formState.endDate || '5/9/2023')
+        );
+
+        console.log(inputData);
+
         // Handle form submission logic here
-        console.log(formState);
     };
 
     return (
@@ -61,7 +70,7 @@ const ReleaseNotesGenerator: React.FC = () => {
                     align="center"
                     gutterBottom
                 >
-                    Neural Notes - Release Notes Generator
+                    Release Notes Generator
                 </Typography>
                 <Typography variant="subtitle1" align="center">
                     Generate release notes for your projects with ease.
@@ -77,24 +86,24 @@ const ReleaseNotesGenerator: React.FC = () => {
                     />
                     <TextField
                         fullWidth
-                        label="Start Commit/PR/Date"
+                        label="Start Date"
                         variant="outlined"
-                        value={formState.startRange}
-                        onChange={(event) => handleChange(event, 'startRange')}
+                        value={formState.startDate}
+                        onChange={(event) => handleChange(event, 'startDate')}
                         className={classes.formElement}
                     />
                     <TextField
                         fullWidth
-                        label="End Commit/PR/Date"
+                        label="End Date"
                         variant="outlined"
-                        value={formState.endRange}
-                        onChange={(event) => handleChange(event, 'endRange')}
+                        value={formState.endDate}
+                        onChange={(event) => handleChange(event, 'endDate')}
                         className={classes.formElement}
                     />
                     <TextField
                         fullWidth
                         multiline
-                        rows={4}
+                        minRows={4}
                         label="Additional Context (Optional)"
                         variant="outlined"
                         value={formState.additionalContext}

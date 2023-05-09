@@ -1,12 +1,12 @@
 {
-  "name": "ts-node-template",
+  "name": "neural-notes",
   "version": "0.0.2",
   "scripts": {
     "start": "yarn react-scripts start",
     "build": "yarn react-scripts build",
     "test": "yarn react-scripts test",
     "eject": "yarn react-scripts eject",
-    "lint": "eslint src/**/*.tsx --quiet"
+    "lint": "eslint src/**/*.tsx --fix"
   },
   "devDependencies": {
     "@types/node": "^20.1.0",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"
