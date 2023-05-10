@@ -1,12 +1,15 @@
 {
     "name": "neural-notes",
     "version": "0.0.2",
+    "homepage": "https://jfrank-summit.github.io/neural-notes",
     "scripts": {
         "start": "yarn react-scripts start",
         "build": "yarn react-scripts build",
         "test": "yarn react-scripts test",
         "eject": "yarn react-scripts eject",
-        "lint": "eslint src/**/*.tsx --fix"
+        "lint": "eslint src/**/*.tsx --fix",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d build"
     },
     "devDependencies": {
         "@types/node": "^20.1.0",
@@ -15,6 +18,7 @@
         "eslint": "^8.40.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "gh-pages": "^5.0.0",
         "prettier": "^2.8.8",
         "typescript": "^5.0.4"
     },
