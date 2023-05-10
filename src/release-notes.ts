@@ -1,8 +1,20 @@
-import * as dotenv from 'dotenv';
 import { OpenAI } from 'langchain/llms/openai';
-import { generatePRInputData } from './fetch-prs';
+import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 
-//dotenv.config();
+import { ExtractedPRData, generatePRInputData } from './fetch-prs';
+
+const summarizePrs = async (prData: ExtractedPRData, model: OpenAI) => {
+    const pr = JSON.stringify(prData);
+    console.log(pr);
+    const response = await model.call(
+        `summarize the following PR for purposes of generating relase notes from an array of summaries:\n\n${JSON.stringify(
+            pr
+        )}`
+    );
+    console.log(response);
+    console.log(`pr length ${pr.length} response length ${response.length}`);
+    return pr.length > response.length ? response : pr;
+};
 
 export const generateReleaseNotes = async (
     repoUrl: string,
@@ -15,11 +27,17 @@ export const generateReleaseNotes = async (
         openAIApiKey: openAIApiKey,
     });
 
-    const prs = JSON.stringify(
-        await generatePRInputData(repoUrl, startDate, endDate)
+    const prs = await generatePRInputData(repoUrl, startDate, endDate);
+    const summaries = await Promise.all(
+        prs.map((pr) => summarizePrs(pr, model))
     );
-    const prompt = `Please generate release notes from the following pull request data:\n\n${prs}\n\nSummarize the main features, improvements, and bug fixes in the release."
-`;
+
+    const prompt = `Please generate properly formatted release notes from the following pull request summaries:\n\n${JSON.stringify(
+        summaries
+    )}\n\n Categorize by main features, improvements, and bug fixes in the release.`;
     console.log(prompt);
-    return await model.call(prompt);
+
+    const response = await model.call(prompt);
+    console.log(response);
+    return response;
 };

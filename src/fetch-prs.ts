@@ -8,7 +8,7 @@ type Commit =
 type Comment =
     Endpoints['GET /repos/{owner}/{repo}/pulls/{pull_number}/comments']['response']['data'][0];
 
-interface ExtractedPRData {
+export interface ExtractedPRData {
     title: string;
     description: string | null;
     labels: string[];
