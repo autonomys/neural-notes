@@ -5,9 +5,11 @@ import {
     Container,
     Typography,
     CssBaseline,
+    CircularProgress,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { generatePRInputData } from './fetch-prs'; // Import generateInputData function
+import ApiKeyManager from './components/ApiKeyManager';
+import { generateReleaseNotes } from './release-notes';
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -37,6 +39,8 @@ const ReleaseNotesGenerator: React.FC = () => {
         endDate: '',
         additionalContext: '',
     });
+    const [releaseNotes, setReleaseNotes] = useState<string>('');
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (
         event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -48,21 +52,22 @@ const ReleaseNotesGenerator: React.FC = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        // Use generateInputData function
-        const inputData = await generatePRInputData(
+        setLoading(true);
+        const generatedReleaseNotes = await generateReleaseNotes(
             formState.repoUrl || 'https://github.com/subspace/subspace-cli',
             new Date(formState.startDate || '5/1/2023'),
             new Date(formState.endDate || '5/9/2023')
         );
+        setLoading(false);
 
-        console.log(inputData);
-
-        // Handle form submission logic here
+        // Update the releaseNotes state with the generated release notes
+        setReleaseNotes(generatedReleaseNotes);
     };
 
     return (
         <>
             <CssBaseline />
+
             <Container maxWidth="sm" className={classes.container}>
                 <Typography
                     variant="h4"
@@ -117,11 +122,28 @@ const ReleaseNotesGenerator: React.FC = () => {
                         variant="contained"
                         type="submit"
                         className={`${classes.generateButton} ${classes.formElement}`}
+                        disabled={loading}
                     >
-                        Generate Release Notes
+                        {loading ? (
+                            <CircularProgress size={24} color="inherit" />
+                        ) : (
+                            'Generate Release Notes'
+                        )}
                     </Button>
                 </form>
+                {/* Add a new element to display the release notes */}
+                {releaseNotes && (
+                    <div className={classes.formElement}>
+                        <Typography variant="h6" component="h2" gutterBottom>
+                            Generated Release Notes:
+                        </Typography>
+                        <Typography variant="body1">
+                            <pre>{releaseNotes}</pre>
+                        </Typography>
+                    </div>
+                )}
             </Container>
+            <ApiKeyManager />
         </>
     );
 };

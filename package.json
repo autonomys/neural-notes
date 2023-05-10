@@ -23,7 +23,6 @@
         "@material-ui/icons": "^4.11.3",
         "@octokit/rest": "^19.0.7",
         "@octokit/types": "^9.2.1",
-        "dotenv": "^16.0.3",
         "langchain": "^0.0.73",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
