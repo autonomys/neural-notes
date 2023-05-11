@@ -1,5 +1,5 @@
 import React from 'react';
-import ReleaseNotesGenerator from './ReleaseNotesGenerator';
+import ReleaseNotesGenerator from './components/ReleaseNotesGenerator';
 
 function App() {
     return <ReleaseNotesGenerator />;

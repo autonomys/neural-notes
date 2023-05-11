@@ -109,6 +109,7 @@ function extractOwnerAndRepo(repoUrl: string): [string, string] {
     }
     return [match[1], match[2]];
 }
+
 export async function generatePRInputData(
     repoUrl: string,
     startDate: Date,

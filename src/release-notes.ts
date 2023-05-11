@@ -1,5 +1,4 @@
 import { OpenAI } from 'langchain/llms/openai';
-import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 
 import { ExtractedPRData, generatePRInputData } from './fetch-prs';
 
@@ -13,7 +12,7 @@ const summarizePrs = async (prData: ExtractedPRData, model: OpenAI) => {
     );
     console.log(response);
     console.log(`pr length ${pr.length} response length ${response.length}`);
-    return pr.length > response.length ? response : pr;
+    return response;
 };
 
 export const generateReleaseNotes = async (
@@ -32,9 +31,9 @@ export const generateReleaseNotes = async (
         prs.map((pr) => summarizePrs(pr, model))
     );
 
-    const prompt = `Please generate properly formatted release notes from the following pull request summaries:\n\n${JSON.stringify(
+    const prompt = `Please generate properly formatted in markdown release notes from the following pull request summaries:\n\n${JSON.stringify(
         summaries
-    )}\n\n Categorize by main features, improvements, and bug fixes in the release.`;
+    )}\n\n Categorize by new features, improvements, and bug fixes in the release. No need for details on PRs, just what is new for the user`;
     console.log(prompt);
 
     const response = await model.call(prompt);

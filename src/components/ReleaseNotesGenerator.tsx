@@ -8,8 +8,8 @@ import {
     CircularProgress,
 } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import ApiKeyManager from './components/ApiKeyManager';
-import { generateReleaseNotes } from './release-notes';
+import ApiKeyManager from './ApiKeyManager';
+import { generateReleaseNotes } from '../release-notes';
 
 const useStyles = makeStyles((theme: Theme) => ({
     container: {
@@ -21,6 +21,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     generateButton: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.common.white,
+    },
+    releaseNotes: {
+        whiteSpace: 'pre-wrap',
+        maxHeight: '300px', // set a maximum height
+        overflowY: 'auto', // add a scrollbar
+        padding: theme.spacing(4),
     },
 }));
 
@@ -137,8 +143,11 @@ const ReleaseNotesGenerator: React.FC = () => {
                         <Typography variant="h6" component="h2" gutterBottom>
                             Generated Release Notes:
                         </Typography>
-                        <Typography variant="body1">
-                            <pre>{releaseNotes}</pre>
+                        <Typography
+                            variant="body1"
+                            className={classes.releaseNotes}
+                        >
+                            {releaseNotes}
                         </Typography>
                     </div>
                 )}
