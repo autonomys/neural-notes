@@ -39,10 +39,15 @@ interface FormState {
 
 const ReleaseNotesGenerator: React.FC = () => {
     const classes = useStyles();
+    const today = new Date();
+    const defaultStartDate = new Date(
+        today.getTime() - 7 * 24 * 60 * 60 * 1000
+    );
+
     const [formState, setFormState] = useState<FormState>({
-        repoUrl: '',
-        startDate: '',
-        endDate: '',
+        repoUrl: 'https://github.com/subspace/subspace-cli',
+        startDate: defaultStartDate.toLocaleDateString(),
+        endDate: today.toLocaleDateString(),
         additionalContext: '',
     });
     const [releaseNotes, setReleaseNotes] = useState<string>('');
@@ -60,9 +65,9 @@ const ReleaseNotesGenerator: React.FC = () => {
 
         setLoading(true);
         const generatedReleaseNotes = await generateReleaseNotes(
-            formState.repoUrl || 'https://github.com/subspace/subspace-cli',
-            new Date(formState.startDate || '5/1/2023'),
-            new Date(formState.endDate || '5/9/2023')
+            formState.repoUrl,
+            new Date(formState.startDate),
+            new Date(formState.endDate)
         );
         setLoading(false);
 
@@ -74,7 +79,7 @@ const ReleaseNotesGenerator: React.FC = () => {
         <>
             <CssBaseline />
 
-            <Container maxWidth="sm" className={classes.container}>
+            <Container maxWidth="md" className={classes.container}>
                 <Typography
                     variant="h4"
                     component="h1"
@@ -111,7 +116,7 @@ const ReleaseNotesGenerator: React.FC = () => {
                         onChange={(event) => handleChange(event, 'endDate')}
                         className={classes.formElement}
                     />
-                    <TextField
+                    {/* <TextField
                         fullWidth
                         multiline
                         minRows={4}
@@ -122,7 +127,7 @@ const ReleaseNotesGenerator: React.FC = () => {
                             handleChange(event, 'additionalContext')
                         }
                         className={classes.formElement}
-                    />
+                    /> */}
                     <Button
                         fullWidth
                         variant="contained"

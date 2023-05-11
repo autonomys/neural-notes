@@ -8,12 +8,18 @@ const useStyles = makeStyles((theme: Theme) => ({
         margin: theme.spacing(1),
     },
     footer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         position: 'fixed',
         bottom: 0,
         width: '100%',
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(2),
-        textAlign: 'center',
+    },
+    textField: {
+        width: '50%',
+        marginRight: theme.spacing(2),
     },
 }));
 
@@ -52,11 +58,12 @@ const ApiKeyManager: React.FC = () => {
     return (
         <div className={classes.footer}>
             <TextField
-                fullWidth
                 label="OpenAI API Key"
                 variant="outlined"
+                size="small"
                 value={apiKey}
                 onChange={handleChange}
+                className={classes.textField}
             />
             <Button
                 variant="contained"
