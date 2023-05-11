@@ -4,9 +4,9 @@ Neural Notes is a web application that aims to utilize an AI language model to a
 
 ## Features (Planned)
 
-- AI-driven release notes generation
-- Customizable input options: commit history, PR descriptions, or release diffs
-- Intuitive user interface
+-   AI-driven release notes generation
+-   Customizable input options: commit history, PR descriptions, or release diffs
+-   Intuitive user interface
 
 ## Getting Started
 
@@ -14,34 +14,34 @@ Follow these steps to set up the Neural Notes application on your local machine.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) (v14.x or later)
-- [yarn](https://yarnpkg.com/getting-started/install) (v1.x or later)
+-   [Node.js](https://nodejs.org/en/) (v14.x or later)
+-   [yarn](https://yarnpkg.com/getting-started/install) (v1.x or later)
 
 ### Installation
 
 1. Clone the repository:
 
-   ```
-   git clone https://github.com/jfrank-summit/neural-notes.git
-   ```
+    ```
+    git clone https://github.com/subspace/neural-notes.git
+    ```
 
 2. Navigate to the project directory:
 
-   ```
-   cd neural-notes
-   ```
+    ```
+    cd neural-notes
+    ```
 
 3. Install the dependencies:
 
-   ```
-   yarn install
-   ```
+    ```
+    yarn install
+    ```
 
 4. Start the development server:
 
-   ```
-   yarn start
-   ```
+    ```
+    yarn start
+    ```
 
 5. Open your browser and visit `http://localhost:3000`. You should now see the Neural Notes application running.
 
