@@ -24,18 +24,30 @@ async function fetchPRsBetweenDates(
     const [owner, repo] = extractOwnerAndRepo(repoUrl);
     const octokit = new Octokit();
 
-    const prs: PullRequest[] = await octokit.paginate(octokit.pulls.list, {
-        owner,
-        repo,
-        state: 'closed',
-        sort: 'updated',
-        direction: 'desc',
-        per_page: 100,
-    });
+    const prs: PullRequest[] = await octokit.paginate(
+        octokit.pulls.list,
+        {
+            owner,
+            repo,
+            state: 'closed',
+            sort: 'updated',
+            direction: 'desc',
+            per_page: 20,
+        },
+        (response, done) => {
+            const lastItem = response.data[response.data.length - 1];
+            const lastMergedAt = new Date(lastItem.merged_at!);
+
+            if (lastMergedAt < startDate) {
+                done();
+            }
+            return response.data;
+        }
+    );
 
     return prs.filter((pr) => {
-        const closedAt = new Date(pr.closed_at!);
-        return closedAt >= startDate && closedAt <= endDate;
+        const mergedAt = new Date(pr.merged_at!);
+        return mergedAt >= startDate && mergedAt <= endDate;
     });
 }
 
