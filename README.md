@@ -44,7 +44,3 @@ Follow these steps to set up the Neural Notes application on your local machine.
     ```
 
 5. Open your browser and visit `http://localhost:3000`. You should now see the Neural Notes application running.
-
-## Usage
-
-The Neural Notes application is currently under development and does not yet include the AI-driven release notes generation features. Please check back for updates or contribute to the project to help expedite the development process.
