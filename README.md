@@ -1,6 +1,6 @@
 # Neural Notes: AI-Powered Release Notes Generator (In Development)
 
-Neural Notes is a web application that aims to utilize an AI language model to automatically generate release notes based on your project's commit history, PR descriptions, or release diffs. By providing useful release notes with minimal editing, Neural Notes will streamline the process of keeping your users informed about important updates and changes. This project is currently in development and does not yet include the AI elements.
+Neural Notes is a web application that aims to utilize an AI language model to automatically generate release notes based on your project's commit history, PR descriptions, or release diffs. By providing useful release notes with minimal editing, Neural Notes will streamline the process of keeping your users informed about important updates and changes. This project is currently in development and not all planned features have been launched.
 
 ## Features (Planned)
 
