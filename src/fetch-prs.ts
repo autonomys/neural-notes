@@ -13,7 +13,6 @@ export interface ExtractedPRData {
     description: string | null;
     labels: string[];
     commits: string[];
-    comments: string[];
 }
 
 async function fetchPRsBetweenDates(
@@ -51,11 +50,11 @@ async function fetchPRsBetweenDates(
     });
 }
 
-async function fetchCommitsAndComments(
+async function fetchCommits(
     repoUrl: string,
     pr: PullRequest,
     octokit: Octokit
-): Promise<{ commits: Commit[]; comments: Comment[] }> {
+): Promise<Commit[]> {
     const [owner, repo] = extractOwnerAndRepo(repoUrl);
 
     const commits: Commit[] = await octokit.paginate(
@@ -68,17 +67,7 @@ async function fetchCommitsAndComments(
         }
     );
 
-    const comments: Comment[] = await octokit.paginate(
-        octokit.pulls.listReviewComments,
-        {
-            owner,
-            repo,
-            pull_number: pr.number,
-            per_page: 100,
-        }
-    );
-
-    return { commits, comments };
+    return commits;
 }
 
 function filterPRs(prs: PullRequest[]): PullRequest[] {
@@ -97,17 +86,12 @@ async function extractPRData(
     const result: ExtractedPRData[] = [];
 
     for (const pr of prs) {
-        const { commits, comments } = await fetchCommitsAndComments(
-            repoUrl,
-            pr,
-            octokit
-        );
+        const commits = await fetchCommits(repoUrl, pr, octokit);
         result.push({
             title: pr.title!,
             description: pr.body,
             labels: pr.labels.map((label) => label.name),
             commits: commits.map((commit) => commit.commit.message),
-            comments: comments.map((comment) => comment.body),
         });
     }
 
