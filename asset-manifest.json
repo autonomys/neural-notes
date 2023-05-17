@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/neural-notes/static/js/main.97f869d2.js",
+    "main.js": "/neural-notes/static/js/main.3929c8ea.js",
     "static/js/651.366ceed4.chunk.js": "/neural-notes/static/js/651.366ceed4.chunk.js",
     "static/js/754.a51f3d76.chunk.js": "/neural-notes/static/js/754.a51f3d76.chunk.js",
     "static/media/tiktoken_bg.wasm": "/neural-notes/static/media/tiktoken_bg.b1e5ae09ac0a1cf4f755.wasm",
     "index.html": "/neural-notes/index.html",
-    "main.97f869d2.js.map": "/neural-notes/static/js/main.97f869d2.js.map",
+    "main.3929c8ea.js.map": "/neural-notes/static/js/main.3929c8ea.js.map",
     "651.366ceed4.chunk.js.map": "/neural-notes/static/js/651.366ceed4.chunk.js.map",
     "754.a51f3d76.chunk.js.map": "/neural-notes/static/js/754.a51f3d76.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.97f869d2.js"
+    "static/js/main.3929c8ea.js"
   ]
 }
