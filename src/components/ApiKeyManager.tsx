@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, makeStyles, Theme } from '@material-ui/core';
+import {
+    TextField,
+    Button,
+    makeStyles,
+    Theme,
+    IconButton,
+    InputAdornment,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const LOCAL_STORAGE_KEY = 'openai-api-key';
 
@@ -27,6 +35,7 @@ const ApiKeyManager: React.FC = () => {
     const classes = useStyles();
     const [apiKey, setApiKey] = useState('');
     const [storedKey, setStoredKey] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // state for showing/hiding password
 
     useEffect(() => {
         loadKey();
@@ -34,6 +43,10 @@ const ApiKeyManager: React.FC = () => {
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setApiKey(event.target.value);
+    };
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
     };
 
     const saveKey = () => {
@@ -58,12 +71,27 @@ const ApiKeyManager: React.FC = () => {
     return (
         <div className={classes.footer}>
             <TextField
+                type={showPassword ? 'text' : 'password'} // toggle input type based on showPassword
                 label="OpenAI API Key"
                 variant="outlined"
                 size="small"
                 value={apiKey}
                 onChange={handleChange}
                 className={classes.textField}
+                InputProps={{
+                    // allows the password visibility toggle button to be an adornment on the text field
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton onClick={handleClickShowPassword}>
+                                {showPassword ? (
+                                    <Visibility />
+                                ) : (
+                                    <VisibilityOff />
+                                )}
+                            </IconButton>
+                        </InputAdornment>
+                    ),
+                }}
             />
             <Button
                 variant="contained"
